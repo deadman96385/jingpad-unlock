@@ -1,4 +1,4 @@
-"export default "-----BEGIN RSA PRIVATE KEY-----\n" +
+export default "-----BEGIN RSA PRIVATE KEY-----\n" +
 "MIIJKAIBAAKCAgEAvhlDD/100cNKFjzpPt97WjUIyN8fVJe+HzH+e4+94Fh4VFDq\n" +
 "7BO4/DYE6JNdk45ggkHNjxRZUxDd1/7oESLWXaa5pI3hQl8jBJOR7FI1zVndZ03A\n" +
 "MiObyydyG92VqaatVHRn97+O3TSgg8ViiZDhFeC7AbStoeJoABy+ThbkRGEgVxGF\n" +
