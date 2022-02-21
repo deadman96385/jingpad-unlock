@@ -75,7 +75,7 @@ async function unlockBootloader() {
 
         console.log(await device.runCommand("flashing unlock_bootloader"));
 
-        document.querySelector("#device-status").textContent = "Unlocked!";
+        document.querySelector("#device-status").textContent = "Confirm Unlock on Device (Volume -)";
     } catch (error) {
         console.error(error);
     }
