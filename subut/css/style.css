@@ -15,14 +15,6 @@ body, .container {
     box-shadow: 0 10px 34px -15px rgba(0, 0, 0, 0.24);
 }
 
-.wrap .header-img {
-    background-image: url(../images/bg-1.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 200px;
-}
-
 .custom-input {
     display: none;
 }
