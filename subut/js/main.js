@@ -57,8 +57,8 @@ async function unlockBootloader() {
         // Check with the device and make sure size matches
         let downloadResp = await device.runCommand(`download:${xferHex}`);
         if (downloadResp.dataSize === null) {
+            document.querySelector("#device-status").textContent = "Unexpected response to download command!";
             throw new FastbootError(
-                document.querySelector("#device-status").textContent = "Unexpected response to download command!";
                 "FAIL",
                 `Unexpected response to download command: ${downloadResp.text}`
             );
