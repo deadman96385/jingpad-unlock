@@ -23,6 +23,7 @@ async function unlockBootloader() {
     document.querySelector("#device-status").textContent = "Unlocking...";
 
     try {
+        document.querySelector("#device-status").textContent = "Requesting Identifier from device...";
         const resp = await device.runCommand("oem get_identifier_token");
         const identifierToken = resp.text.split('\n')[2];
         const identifier = identifierToken + "0".repeat(64 * 2).substring(identifierToken.length);
@@ -30,6 +31,7 @@ async function unlockBootloader() {
         console.debug("Identifier:", identifier);
 
         if (identifier.length > (64 * 2)) {
+            document.querySelector("#device-status").textContent = "Identifier token size overflow!";
             throw new FastbootError(
                 "FAIL",
                 `Identifier token size overflow: ${identifier.length} is more than ${64 * 2} digits`);
@@ -45,6 +47,7 @@ async function unlockBootloader() {
         // Bootloader requires an 8-digit hex number
         let xferHex = buffer.byteLength.toString(16).padStart(8, "0");
         if (xferHex.length !== 8) {
+            document.querySelector("#device-status").textContent = "Transfer size overflow!";
             throw new FastbootError(
                 "FAIL",
                 `Transfer size overflow: ${xferHex} is more than 8 digits`
@@ -55,6 +58,7 @@ async function unlockBootloader() {
         let downloadResp = await device.runCommand(`download:${xferHex}`);
         if (downloadResp.dataSize === null) {
             throw new FastbootError(
+                document.querySelector("#device-status").textContent = "Unexpected response to download command!";
                 "FAIL",
                 `Unexpected response to download command: ${downloadResp.text}`
             );
@@ -67,9 +71,11 @@ async function unlockBootloader() {
             );
         }
 
+        document.querySelector("#device-status").textContent = "Sending Payload...";
         console.log(`Sending payload: ${buffer.byteLength} bytes`);
         await device.sendRawPayload(buffer, () => {});
 
+        document.querySelector("#device-status").textContent = "Payload sent, waiting for response...";
         console.log("Payload sent, waiting for response...");
         await device.readResponse();
 
